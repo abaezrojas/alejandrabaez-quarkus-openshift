@@ -1,0 +1,274 @@
+{
+  "info": {
+    "name": "Quarkus OpenShift API Collection",
+    "description": "Colección de endpoints para la aplicación Quarkus OpenShift con recursos de Contact y Greeting",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://backend-alejandrabaez-quarkus-alejandra-baez-playground-quarkus.apps-crc.testing",
+      "type": "string",
+      "description": "URL base de la aplicación Quarkus en OpenShift"
+    }
+  ],
+  "item": [
+    {
+      "name": "Greeting Resource",
+      "description": "Endpoints para el recurso de saludos",
+      "item": [
+        {
+          "name": "Hello Simple",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/hello",
+              "host": ["{{baseUrl}}"],
+              "path": ["hello"]
+            },
+            "description": "Endpoint simple que devuelve 'hello'"
+          },
+          "response": []
+        },
+        {
+          "name": "Greeting with Name",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/hello/greeting/Juan",
+              "host": ["{{baseUrl}}"],
+              "path": ["hello", "greeting", "Juan"]
+            },
+            "description": "Endpoint que devuelve un saludo personalizado con el nombre proporcionado"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Contact Resource",
+      "description": "Endpoints CRUD para el recurso de contactos",
+      "item": [
+        {
+          "name": "Get All Contacts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact"]
+            },
+            "description": "Obtiene todos los contactos"
+          },
+          "response": []
+        },
+        {
+          "name": "Search All Contacts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact/search",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact", "search"]
+            },
+            "description": "Búsqueda de todos los contactos (endpoint alternativo)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Contact by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact", "1"]
+            },
+            "description": "Obtiene un contacto específico por su ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Contact by Email",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact/email/example@example.com",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact", "email", "example@example.com"]
+            },
+            "description": "Obtiene un contacto por su dirección de email"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Contact",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Juan Pérez\",\n  \"email\": \"juan.perez@example.com\",\n  \"dataProtection\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contact",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact"]
+            },
+            "description": "Crea un nuevo contacto"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Contact",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Juan Carlos Pérez\",\n  \"email\": \"juan.carlos@example.com\",\n  \"dataProtection\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contact/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact", "1"]
+            },
+            "description": "Actualiza un contacto existente por ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Contact Email",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/plain"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "nuevo.email@example.com"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contact/email/juan.perez@example.com",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact", "email", "juan.perez@example.com"]
+            },
+            "description": "Actualiza solo el email de un contacto buscándolo por email actual"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Contact",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact", "1"]
+            },
+            "description": "Elimina un contacto por su ID"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
