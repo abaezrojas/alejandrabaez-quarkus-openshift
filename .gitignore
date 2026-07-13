@@ -68,3 +68,9 @@ nb-configuration.xml
 /.quarkus/cli/plugins/
 # TLS Certificates
 .certs/
+
+configmap.yaml
+deployment.yaml
+route.yaml
+secret.yaml
+service.yaml
