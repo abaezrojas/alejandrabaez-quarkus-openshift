@@ -249,6 +249,64 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "Middleware Resource",
+      "description": "Endpoints para consultar centros de servicio y parámetros SIPAP",
+      "item": [
+        {
+          "name": "Get Sucursales",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/middleware/sucursales?buscar=Microcentro",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "middleware", "sucursales"],
+              "query": [
+                {
+                  "key": "buscar",
+                  "value": "Microcentro",
+                  "description": "Nombre o dirección del centro de servicio a buscar"
+                }
+              ]
+            },
+            "description": "Endpoint público para consultar centros de servicio"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Parametros SIPAP",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/middleware/sipap?dominio=motivos-sipap",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "middleware", "sipap"],
+              "query": [
+                {
+                  "key": "dominio",
+                  "value": "motivos-sipap",
+                  "description": "Dominio de parámetros SIPAP a consultar"
+                }
+              ]
+            },
+            "description": "Endpoint seguro para consultar parámetros SIPAP (requiere JWT token válido)"
+          },
+          "response": []
+        }
+      ]
     }
   ],
   "event": [
