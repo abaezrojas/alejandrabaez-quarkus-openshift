@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: mi-frontend
+  labels:
+    app: mi-frontend
+spec:
+  host: mi-frontend-alejandra-baez-playground-quarkus.apps-crc.testing
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: mi-frontend
+    weight: 100
+  wildcardPolicy: None

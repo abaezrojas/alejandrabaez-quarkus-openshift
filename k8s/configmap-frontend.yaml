@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mi-frontend-config
+  namespace: default
+data:
+  # URL base de la API del servicio Quarkus
+  # Esta será inyectada como variable de entorno en el Pod
+  VITE_API_URL: "http://backend-alejandrabaez-quarkus:8080/api"
