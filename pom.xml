@@ -152,6 +152,27 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-frontend-dist</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/src/main/resources/META-INF/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/mi-frontend/dist</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
