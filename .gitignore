@@ -74,3 +74,4 @@ deployment.yaml
 route.yaml
 secret.yaml
 service.yamlkubectl
+kubectl
