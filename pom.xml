@@ -164,23 +164,8 @@
                         </goals>
                         <configuration>
                             <target>
-                                <echo message="Checking if frontend build exists..." />
-                                <available file="${basedir}/mi-frontend/dist" property="dist.exists" />
-                                <condition property="should.build.frontend">
-                                    <and>
-                                        <available file="${basedir}/mi-frontend/package.json" />
-                                        <not>
-                                            <isset property="dist.exists" />
-                                        </not>
-                                    </and>
-                                </condition>
-                                <echo message="Building frontend with npm..." />
-                                <exec executable="npm" dir="${basedir}/mi-frontend" failonerror="false" condition="should.build.frontend">
-                                    <arg value="run" />
-                                    <arg value="build" />
-                                </exec>
                                 <echo message="Copying frontend build to resources..." />
-                                <copy todir="${basedir}/src/main/resources/META-INF/resources" verbose="true" failonerror="false">
+                                <copy todir="${basedir}/src/main/resources/META-INF/resources" verbose="false" failonerror="false">
                                     <fileset dir="${basedir}/mi-frontend/dist" erroronmissingdir="false" />
                                 </copy>
                             </target>
