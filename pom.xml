@@ -153,22 +153,27 @@
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
-                        <id>copy-frontend-dist</id>
-                        <phase>process-resources</phase>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>copy-resources</goal>
+                            <goal>run</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/src/main/resources/META-INF/resources</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/mi-frontend/dist</directory>
-                                </resource>
-                            </resources>
+                            <target>
+                                <echo message="Building frontend with npm..." />
+                                <exec executable="npm" dir="${basedir}/mi-frontend" failonerror="true">
+                                    <arg value="run" />
+                                    <arg value="build" />
+                                </exec>
+                                <echo message="Copying frontend build to resources..." />
+                                <copy todir="${basedir}/src/main/resources/META-INF/resources" verbose="true">
+                                    <fileset dir="${basedir}/mi-frontend/dist" />
+                                </copy>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
