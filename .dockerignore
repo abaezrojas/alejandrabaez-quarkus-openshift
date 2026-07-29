@@ -5,7 +5,6 @@ node_modules
 .node_modules
 dist
 build
-target
 .vscode
 .idea
 *.log
