@@ -1,35 +1,18 @@
-# Build stage - Compile con memoria limitada
-FROM registry.access.redhat.com/ubi9/openjdk-21:1.23 AS builder
+# Dockerfile optimizado para JAR pre-compilado
+# Uso: Compilar localmente con ./mvnw clean package -DskipTests
+# Luego: docker build -t quarkus-app:latest .
 
-WORKDIR /build
-
-# Establecer opciones de Maven para memoria limitada
-ENV MAVEN_OPTS="-Xmx512m -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
-
-# Copiar archivos de Maven wrapper PRIMERO
-COPY .mvn .mvn/
-COPY mvnw mvnw
-COPY pom.xml pom.xml
-
-# Copiar código fuente
-COPY src ./src
-COPY mi-frontend ./mi-frontend
-
-# Dar permisos y compilar con bash
-RUN bash mvnw clean package -DskipTests -q
-
-# Runtime stage - Imagen final
 FROM registry.access.redhat.com/ubi9/openjdk-21:1.23
 
 ENV LANGUAGE='en_US:en'
 
 WORKDIR /deployments
 
-# Copiar artifacts del builder
-COPY --from=builder /build/target/quarkus-app/lib/ /deployments/lib/
-COPY --from=builder /build/target/quarkus-app/*.jar /deployments/
-COPY --from=builder /build/target/quarkus-app/app/ /deployments/app/
-COPY --from=builder /build/target/quarkus-app/quarkus/ /deployments/quarkus/
+# Copiar SOLO los artifacts compilados (JAR ya existe)
+COPY target/quarkus-app/lib/ /deployments/lib/
+COPY target/quarkus-app/*.jar /deployments/
+COPY target/quarkus-app/app/ /deployments/app/
+COPY target/quarkus-app/quarkus/ /deployments/quarkus/
 
 EXPOSE 8080
 USER 185
