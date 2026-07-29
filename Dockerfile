@@ -16,9 +16,7 @@ COPY src ./src
 COPY mi-frontend ./mi-frontend
 
 # Build con memoria limitada - skip tests
-RUN chmod +x ./mvnw && \
-    ./mvnw clean package -DskipTests -q && \
-    ls -la target/quarkus-app/
+RUN bash -c './mvnw clean package -DskipTests -q'
 
 # Runtime stage - Imagen final
 FROM registry.access.redhat.com/ubi9/openjdk-21:1.23
