@@ -6,17 +6,17 @@ WORKDIR /build
 # Establecer opciones de Maven para memoria limitada
 ENV MAVEN_OPTS="-Xmx512m -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
 
-# Copiar pom.xml y build wrapper
-COPY pom.xml .
-COPY mvnw .
+# Copiar archivos de Maven wrapper PRIMERO
 COPY .mvn .mvn/
+COPY mvnw mvnw
+COPY pom.xml pom.xml
 
 # Copiar código fuente
 COPY src ./src
 COPY mi-frontend ./mi-frontend
 
-# Build con memoria limitada - skip tests
-RUN bash -c './mvnw clean package -DskipTests -q'
+# Dar permisos y compilar con bash
+RUN bash mvnw clean package -DskipTests -q
 
 # Runtime stage - Imagen final
 FROM registry.access.redhat.com/ubi9/openjdk-21:1.23
