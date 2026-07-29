@@ -191,5 +191,29 @@
                 <quarkus.native.enabled>true</quarkus.native.enabled>
             </properties>
         </profile>
+        <profile>
+            <id>limited-memory</id>
+            <activation>
+                <property>
+                    <name>limited-memory</name>
+                </property>
+            </activation>
+            <properties>
+                <maven.compiler.source>17</maven.compiler.source>
+                <maven.compiler.target>17</maven.compiler.target>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <fork>true</fork>
+                            <argLine>-Xmx512m</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>
