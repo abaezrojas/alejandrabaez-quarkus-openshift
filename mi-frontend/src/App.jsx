@@ -22,7 +22,7 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch(`${window.API_CONFIG.apiUrl}/../hello`)
+      const response = await fetch(`http://localhost:8080/hello`)
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       const text = await response.text()
       setGreeting(text)
@@ -37,7 +37,7 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch(`${window.API_CONFIG.apiUrl}/middleware/sucursales?buscar=Microcentro`)
+      const response = await fetch(`http://localhost:8080/api/middleware/sucursales?buscar=Microcentro`)
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       const data = await response.json()
       setSucursales(data)
